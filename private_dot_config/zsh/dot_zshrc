@@ -1,0 +1,78 @@
+# Allows you to select in a menu
+zstyle ':completion:*' menu select
+
+# Auto complete with case insensivity.
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Display a description during completion
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+
+# Set descriptions order.
+zstyle ':completion:*:*:-command-:*:*' group-order alias builtins functions commands
+
+# Group different types of matches under their descriptions
+zstyle ':completion:*' group-name ''
+
+# Cache completions.
+zstyle ':completion:*' use-cache on
+
+# Enable completion
+autoload -Uz compinit && compinit
+
+# Lets files beginning with a . to be matched without specifying the dot.
+setopt globdots
+
+# - History config
+[[ ! -e "$ZCACHE" ]] && mkdir "$ZCACHE"
+HISTFILE="$ZCACHE/history"
+HISTSIZE=100000
+SAVEHIST=100000
+
+# Write the history file in the ':start:elapsed;command' format.
+setopt EXTENDED_HISTORY
+
+# Share history between all sessions
+setopt SHARE_HISTORY
+
+# Expire a duplicate event first when trimming history.
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# Do not display duplicates when searching for history
+setopt HIST_FIND_NO_DUPS
+
+# Do not put duplicated command into history list
+setopt HIST_IGNORE_ALL_DUPS
+
+# Do not save duplicated command
+setopt HIST_SAVE_NO_DUPS
+
+# Append command to history file immediately after execution
+setopt INC_APPEND_HISTORY
+
+# Load aliases and functions
+source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/functions.zsh
+
+# -- Fzf config --
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git . $HOME'
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Change to a directory below home.
+export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git . $HOME "
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# Plugins
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
+# A better way to navigate directories
+source /home/lucas/.config/broot/launcher/bash/br
+
+# Enable Starship
+eval "$(starship init zsh)"
+

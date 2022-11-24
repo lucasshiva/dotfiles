@@ -1,0 +1,9 @@
+[edit]
+    command = "code"
+    args = ["--wait"]
+
+[diff]
+    exclude = ["scripts"]
+
+[status]
+    exclude = ["scripts"]

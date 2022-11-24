@@ -1,0 +1,17 @@
+[core]
+  pager = delta
+  editor = nvim
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  features = line-numbers decorations navigate
+  syntax-theme = Dracula
+[merge]
+  conflicstyle = diff3
+[user]
+  email = silva.lucasdev@gmail.com
+  name = Lucas Cavalcante da Silva
+[init]
+  defaultBranch = main
+[credential]
+  helper = store
