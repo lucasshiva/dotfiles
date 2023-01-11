@@ -5,7 +5,6 @@ packages=(
     kitty
     chromium
     firefox
-    discord
     neovim
     neovide
     calibre
@@ -15,9 +14,7 @@ packages=(
     obsidian
     spotify
     mailspring
-    pcloud-drive
     grub-customizer
-    joplin-appimage
     ffmpeg-compat-57
 
     # Utilities
@@ -46,7 +43,6 @@ packages=(
     xclip
     fzf
     file-roller
-    nemo-fileroller
     noise-suppression-for-voice
     python-pip
     starship
