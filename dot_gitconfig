@@ -15,3 +15,5 @@
   defaultBranch = main
 [credential]
   helper = store
+[safe]
+	directory = /opt/flutter
