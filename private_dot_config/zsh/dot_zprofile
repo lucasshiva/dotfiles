@@ -16,6 +16,8 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export GOPATH="$HOME/Programming/go"
 export PATH="$PATH:$GOPATH/bin"
 
+# Dart binary
 export PATH="$PATH:/opt/flutter/bin"
 
-#[[ -f "$HOME/.profile"]] && source "$HOME/.profile"
+# Custom scripts
+export PATH="$PATH:$HOME/bin"
