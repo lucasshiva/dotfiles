@@ -5,17 +5,17 @@ packages=(
     noto-fonts
     noto-fonts-cjk
     ttf-opensans
-    nerd-fonts-fantasque-sans-mono
+    ttf-fantasque-nerd
     ttf-bookerly
     ttf-lato
     ttf-ubuntu-font-family
     otf-spectral
-    nerd-fonts-jetbrains-mono
+    ttf-jetbrains-mono-nerd
     ttf-firacode-nerd
     ttf-merriweather
     ttf-merriweather-sans
     ttf-sourcecodepro-nerd
-    nerd-fonts-dejavu-complete
+    ttf-dejavu-nerd
 )
 
 package_string=$(printf " %s" "${packages[@]}")
@@ -26,7 +26,7 @@ yay -S --needed --noconfirm $package_string
 
 # Path to the Windows 10 C: partition. Leave it blank if you don't have a Windows 
 # partition, or simply do not want to install its fonts.
-windows_dir="/Windows10/System"
+windows_dir="/mnt/Windows/System"
 
 # Check if directory exists
 # This will not run if the directory is an empty string.

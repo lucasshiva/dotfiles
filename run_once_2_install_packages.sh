@@ -3,19 +3,13 @@
 packages=(
     # Applications
     kitty
-    chromium
     firefox
+    firefox-developer-edition
     neovim
-    neovide
-    calibre
-    baobab
-    bitwarden
-    gammy
     obsidian
     spotify
-    mailspring
     grub-customizer
-    ffmpeg-compat-57
+    keepassxc
 
     # Utilities
     xarchiver
@@ -43,10 +37,13 @@ packages=(
     xclip
     fzf
     file-roller
-    noise-suppression-for-voice
     python-pip
     starship
     syncthing
+    chezmoi
+    cmake
+    ffmpeg4.4
+    extension-manager
 )
 
 package_string=$(printf " %s" "${packages[@]}")
