@@ -1,10 +1,9 @@
 #!/bin/bash
 
 main() {
-    # Make sure everything is up to date.
+    # Avoid running `-Syu` every time we call `install_packages`.
     sudo pacman -Syu
 
-    # Setup
     setup_core
     setup_yay
     setup_zsh
@@ -20,6 +19,10 @@ setup_yay() {
         cd "$HOME/yay"
         makepkg -si
     fi
+
+    # Uncomment the `Color` and `ParallelDownloads` lines if needed.
+    sudo sed -i "/Color/s/^#//g" /etc/pacman.conf
+    sudo sed -i '/ParallelDownloads/s/^#//g' /etc/pacman.conf
 }
 
 setup_zsh() {
@@ -40,7 +43,21 @@ setup_zsh() {
 }
 
 setup_core() {
-    sudo pacman -S --needed --noconfirm coreutils usbutils base-devel findutils which
+    # Setup some core packages we might need.
+    packages=(
+        coreutils
+        usbutils
+        base-devel
+        git
+        findutils
+        which
+        mlocate
+        ntfs-3g
+        dosfstools
+        mtools
+    )
+
+    install_packages $packages
 }
 
 install_packages() {
@@ -72,12 +89,12 @@ setup_fonts() {
         ttf-sourcecodepro-nerd
         ttf-dejavu-nerd
     )
+
     install_packages $fonts
 
     # If we find the Windows system partition, copy the fonts.
     # In my case, it's mostly `/mnt/windows/system`.
-    # We could try searching for the directory automatically.
-
+    # NOTE: We could also try searching for the directory automatically.
     windows_dir="/mnt/windows/system"
 
     if [[ $windows_dir && -d $windows_dir ]]; then
@@ -95,26 +112,28 @@ setup_packages() {
         kitty
         firefox
         firefox-developer-edition
+        chromium
         neovim
         obsidian
         spotify
         grub-customizer
         keepassxc
+        visual-studio-code-bin
+
+        # Theming
+        papirus-icon-theme 
+        arc-gtk-theme 
+        catppuccin-gtk-theme-mocha 
+        catppuccin-mocha-light-cursors
 
         # Utilities
         xarchiver
         fastfetch
-        base-devel
         gnome-keyring
-        ntfs-3g
-        dosfstools
-        mtools
         bat
         exa
         fd
         broot
-        mlocate
-        which
         reflector
         numlockx
         zenity
@@ -130,7 +149,6 @@ setup_packages() {
         python-pip
         starship
         syncthing
-        chezmoi
         cmake
         ffmpeg4.4
         extension-manager
@@ -140,8 +158,7 @@ setup_packages() {
 }
 
 package_exists() {
-    pacman -Qq "$1" &> /dev/null;
-    
+    pacman -Qq "$1" &> /dev/null; 
 }
 
 command_exists() {
