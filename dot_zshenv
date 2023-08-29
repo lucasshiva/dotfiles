@@ -1,3 +1,24 @@
-# Zsh will source this file on startup.
+# This file is always sourced, so it should set environment
+# variables which need to be updated frequently.
+
+# ZSH config.
 export ZDOTDIR="$HOME/.config/zsh"
 export ZCACHE="$HOME/.cache/zsh"
+
+# Cargo binaries.
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Poetry - A package manager for Python
+export PATH="$HOME/.poetry/bin:$PATH"
+
+# GOPATH
+export GOPATH="$HOME/Programming/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# Custom scripts
+export PATH="$PATH:$HOME/bin"
+
+# Flutter
+export CHROME_EXECUTABLE="/usr/bin/chromium"
+export PATH="$PATH:$HOME/.pub-cache/bin"
+export PATH="$PATH:/opt/flutter/bin"

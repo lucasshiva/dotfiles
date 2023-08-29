@@ -1,23 +1,11 @@
-# Common variables
-export EDITOR="nvim"
-export VISUAL="code"
-export TERM="kitty"
+# This file is sourced at login. 
+# Use this for command and variables which:
+# 1. should be set once;
+# 2. don't need to be updated frequently; 
 
 # Colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Cargo binaries.
-export PATH="$HOME/.cargo/bin:$PATH"
-
-# Poetry - A package manager for Python
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# GOPATH
-export GOPATH="$HOME/Programming/go"
-export PATH="$PATH:$GOPATH/bin"
-
-# Dart binary
-export PATH="$PATH:/opt/flutter/bin"
-
-# Custom scripts
-export PATH="$PATH:$HOME/bin"
+export EDITOR="code"
+export VISUAL="code"
+export TERM="kitty"
