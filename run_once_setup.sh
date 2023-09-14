@@ -55,6 +55,7 @@ setup_core() {
         ntfs-3g
         dosfstools
         mtools
+        sd
     )
 
     install_packages $packages
