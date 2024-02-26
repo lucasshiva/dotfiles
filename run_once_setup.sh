@@ -9,6 +9,21 @@ main() {
     setup_zsh
     setup_fonts
     setup_packages
+    setup_gnome
+}
+
+setup_gnome() {
+    # Load dconf settings
+    dconf load / < dconf-settings.ini
+
+    # Manually set wallpaper
+    wallpaper_path=$(readlink -f ./wallpaper.jpg)
+    gsettings set org.gnome.desktop.background picture-uri "file://$wallpaper_path"
+    gsettings set org.gnome.desktop.background picture-uri-dark "file://$wallpaper_path"
+    gsettings set org.gnome.desktop.screensaver picture-uri "file://$wallpaper_path"
+
+    # Removes "Window is ready" message.
+    gsettings set org.gnome.desktop.wm.preferences focus-new-windows 'smart'
 }
 
 setup_yay() {
@@ -67,19 +82,18 @@ install_packages() {
 
     # TODO: Add more package managers, such as Paru, Amethyst, etc.
     if command_exists yay; then
-        yay -S --needed --noconfirm $package_string
+        yay -S --needed $package_string
     else
-        pacman -S --needed --noconfirm $package_string
+        pacman -S --needed $package_string
     fi
 }
 
 setup_fonts() {
-    fonts=(
+    packages=(
         noto-fonts
         noto-fonts-cjk
         ttf-opensans
         ttf-fantasque-nerd
-        ttf-bookerly
         ttf-lato
         ttf-ubuntu-font-family
         otf-spectral
@@ -89,14 +103,17 @@ setup_fonts() {
         ttf-merriweather-sans
         ttf-sourcecodepro-nerd
         ttf-dejavu-nerd
+        otf-monaspace-nerd
+        ttf-mononoki-nerd
+        inter-font
     )
 
-    install_packages $fonts
+    install_packages $packages
 
     # If we find the Windows system partition, copy the fonts.
     # In my case, it's mostly `/mnt/windows/system`.
     # NOTE: We could also try searching for the directory automatically.
-    windows_dir="/mnt/windows/system"
+    windows_dir="/mnt/Windows/System"
 
     if [[ $windows_dir && -d $windows_dir ]]; then
         sudo mkdir /usr/share/fonts/WindowsFonts &> /dev/null
@@ -113,10 +130,15 @@ setup_packages() {
         kitty
         firefox
         firefox-developer-edition
-        chromium
+        google-chrome
         neovim
-        obsidian
+        obsidian-bin
         spotify
+        # Optional deps for Spotify
+        zenity
+        libnotify
+        ffmpeg4.4
+
         grub-customizer
         keepassxc
         visual-studio-code-bin
@@ -126,6 +148,7 @@ setup_packages() {
         arc-gtk-theme 
         catppuccin-gtk-theme-mocha 
         catppuccin-mocha-light-cursors
+        bibata-cursor-theme
 
         # Utilities
         xarchiver
@@ -137,7 +160,6 @@ setup_packages() {
         broot
         reflector
         numlockx
-        zenity
         zoxide
         duf
         git-delta
@@ -151,7 +173,6 @@ setup_packages() {
         starship
         syncthing
         cmake
-        ffmpeg4.4
         extension-manager
     )
 
