@@ -102,6 +102,9 @@
   programs.fish = {
     enable = true;
     generateCompletions = true;
+    shellInit = ''
+      set -g fish_greeting
+    '';
   };
 
   # Maybe we could move this into a starship.nix file.
