@@ -74,6 +74,36 @@
     };
   };
 
+  # Though we can set the default shell directly in home-manager,
+  # it would require activation scripts and root access on activation.
+  #
+  # Therefore, we spawn the default shell (zsh or fish) through bash.
+  # For example, add the following in .bashrc to enable fish:
+  #
+  # # If not running interactively, don't do anything
+  # [[ $- != *i* ]] && return
+  #
+  # if command -v fish >/dev/null; then
+  #   exec fish
+  # fi
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    history = {
+      size = 20000;
+      ignoreAllDups = true;
+      path = "$HOME/.zsh_history";
+    };
+  };
+
+  programs.fish = {
+    enable = true;
+    generateCompletions = true;
+  };
+
   # Maybe we could also manage the settings from here.
   programs.keepassxc.enable = true;
 
