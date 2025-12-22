@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -102,6 +102,15 @@
   programs.fish = {
     enable = true;
     generateCompletions = true;
+  };
+
+  # Maybe we could move this into a starship.nix file.
+  # That way, starship.nix and starship.toml would live together in the same folder.
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
+    settings = lib.importTOML ./starship/starship.toml;
   };
 
   # Maybe we could also manage the settings from here.
