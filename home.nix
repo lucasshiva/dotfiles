@@ -15,9 +15,7 @@
   # release notes.
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
+    home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -30,7 +28,9 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    nerd-fonts.monaspace
+    nerd-fonts.monaspace  # Coding font
+    inter  # Interface font
+    merriweather  # Document font
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
