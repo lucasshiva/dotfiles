@@ -132,13 +132,6 @@
   # We could also manage the settings from here, but I don't mind doing it from the GUI.
   programs.keepassxc.enable = true;
 
-  # Code editors.
-  # Since I'm on Arch, I might just install these through pacman to avoid Nix friction.
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode.fhs;
-  };
-
   # Manage XDG base directories, like XDG_DATA_HOME, XDG_CACHE_HOME, etc.
   xdg.enable = true;
 
