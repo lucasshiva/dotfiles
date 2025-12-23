@@ -126,6 +126,11 @@
     '';
   };
 
+  home.shellAliases = {
+    cat = "bat --paging=never";
+    bat = "bat --color=always";
+  };
+
   # Shell prompt.
   # Maybe we could move this into a starship.nix file.
   # That way, starship.nix and starship.toml would live together in the same folder.
@@ -148,6 +153,14 @@
     icons = "auto"; # This requires a nerd font.
     git = true;
     colors = "always";
+  };
+
+  # `cat` clone with syntax highlighting and git integration.
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [
+      batman # To colorize man pages.
+    ];
   };
 
   # Password manager.
