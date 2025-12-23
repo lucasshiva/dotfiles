@@ -66,6 +66,7 @@
       user.name = "Lucas Silva";
       user.email = "silva.lucasdev@gmail.com";
       init.defaultBranch = "main";
+      merge.conflictStyle = "zdiff3"; # For `delta`.
     };
   };
 
@@ -168,6 +169,19 @@
   # Fast text searcher. Can be used as a faster `grep` alternative.
   programs.ripgrep = {
     enable = true;
+  };
+
+  # Syntax highlighting for git diffs.
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      dark = true;
+      side-by-side = true;
+      line-numbers = true;
+      syntax-theme = "Catppuccin Mocha";
+    };
   };
 
   # Password manager.
