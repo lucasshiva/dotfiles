@@ -15,7 +15,7 @@
   # release notes.
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
-    home.packages = with pkgs; [
+  home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -104,6 +104,7 @@
     '';
   };
 
+  # Shell prompt.
   # Maybe we could move this into a starship.nix file.
   # That way, starship.nix and starship.toml would live together in the same folder.
   programs.starship = {
@@ -113,6 +114,7 @@
     settings = lib.importTOML ./starship/starship.toml;
   };
 
+  # A modern alternative for ls.
   programs.eza = {
     enable = true;
     enableZshIntegration = true;
@@ -126,8 +128,16 @@
     colors = "always";
   };
 
-  # Maybe we could also manage the settings from here.
+  # Password manager.
+  # We could also manage the settings from here, but I don't mind doing it from the GUI.
   programs.keepassxc.enable = true;
+
+  # Code editors.
+  # Since I'm on Arch, I might just install these through pacman to avoid Nix friction.
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
