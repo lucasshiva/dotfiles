@@ -20,6 +20,7 @@ install_package() {
 
 install_fvm() {
     echo "Installing FVM - Flutter Version Manager..."
+    sudo pacman -S ninja cmake --noconfirm --needed
     curl -fsSL https://fvm.app/install.sh | bash
 }
 
