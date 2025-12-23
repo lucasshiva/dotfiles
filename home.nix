@@ -131,6 +131,13 @@
     cat = "bat --paging=never";
     bat = "bat --color=always";
     hms = "home-manager switch";
+
+    # To colorize help messages.
+    # Example: delta --help | bathelp
+    #
+    # We could define a shell function instead. Then, we could use it without piping like so:
+    # help delta
+    bathelp = "bat -plhelp";
   };
 
   # Shell prompt.
