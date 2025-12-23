@@ -31,6 +31,10 @@
     nerd-fonts.monaspace  # Coding font
     inter  # Interface font
     merriweather  # Document font
+
+    # I sync everything via Firefox's native sync.
+    firefox
+    firefox-devedition
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
