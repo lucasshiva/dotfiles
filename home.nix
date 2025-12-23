@@ -160,7 +160,13 @@
     enable = true;
     extraPackages = with pkgs.bat-extras; [
       batman # To colorize man pages.
+      batgrep # Uses bat as printer for `ripgrep` search results.
     ];
+  };
+
+  # Fast text searcher. Can be used as a faster `grep` alternative.
+  programs.ripgrep = {
+    enable = true;
   };
 
   # Password manager.
