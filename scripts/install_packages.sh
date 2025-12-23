@@ -35,6 +35,8 @@ install_fvm() {
 }
 
 install_package visual-studio-code-bin
+install_package rider
+install_package android-studio
 install_package dotnet-sdk dotnet-sdk-9.0
 install_package uv
 install_fvm
