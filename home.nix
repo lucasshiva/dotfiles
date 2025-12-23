@@ -139,6 +139,9 @@
     package = pkgs.vscode.fhs;
   };
 
+  # Manage XDG base directories, like XDG_DATA_HOME, XDG_CACHE_HOME, etc.
+  xdg.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
