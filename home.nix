@@ -88,8 +88,9 @@
   home.sessionPath = [
     # Add custom paths to the $PATH environment variable.
     "$HOME/.local/bin"
-    "$HOME/fvm/bin"
     "$HOME/.nix-profile/bin"
+    "$HOME/fvm/bin"
+    "$HOME/.pub-cache/bin"
   ];
 
   # Though we can set the default shell directly in home-manager,
