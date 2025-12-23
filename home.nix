@@ -33,6 +33,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    # Fonts
     nerd-fonts.monaspace # Coding font
     inter # Interface font
     merriweather # Document font
@@ -43,6 +45,9 @@
 
     # Formatter for Nix files.
     nixfmt-rfc-style
+
+    # For Wayland clipboard support.
+    wl-clipboard
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
