@@ -60,6 +60,15 @@
     # '';
   };
 
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "Lucas Silva";
+      user.email = "silva.lucasdev@gmail.com";
+      init.defaultBranch = "main";
+    };
+  };
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -70,18 +79,18 @@
   #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #  /etc/profiles/per-user/lucas/etc/profile.d/hm-session-vars.sh
   #
+  # I am sourcing it in my .bashrc, and bash starts fish or zsh as the default shell.
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "code --wait";
+    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
   };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "Lucas Silva";
-      user.email = "silva.lucasdev@gmail.com";
-      init.defaultBranch = "main";
-    };
-  };
+  home.sessionPath = [
+    # Add custom paths to the $PATH environment variable.
+    "$HOME/.local/bin"
+    "$HOME/fvm/bin"
+    "$HOME/.nix-profile/bin"
+  ];
 
   # Though we can set the default shell directly in home-manager,
   # it would require activation scripts and root access on activation.
