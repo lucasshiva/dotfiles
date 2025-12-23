@@ -129,6 +129,7 @@
   home.shellAliases = {
     cat = "bat --paging=never";
     bat = "bat --color=always";
+    hms = "home-manager switch";
   };
 
   # Shell prompt.
