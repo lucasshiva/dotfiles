@@ -12,6 +12,11 @@ fi
 
 install_package() {
     for package in "$@"; do
+        if yay -Qi "${package}" >/dev/null 2>&1; then
+            echo "${package} is already installed."
+            continue
+        fi
+
         echo "Installing ${package}..."
         yay -S --noconfirm --needed "${package}"
         return
@@ -19,6 +24,11 @@ install_package() {
 }
 
 install_fvm() {
+    if command -v fvm >/dev/null; then
+        echo "FVM is already installed."
+        return
+    fi
+
     echo "Installing FVM - Flutter Version Manager..."
     sudo pacman -S ninja cmake --noconfirm --needed
     curl -fsSL https://fvm.app/install.sh | bash
