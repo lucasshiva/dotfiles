@@ -191,6 +191,12 @@
     };
   };
 
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
+  };
+
   # Password manager.
   # We could also manage the settings from here, but I don't mind doing it from the GUI.
   programs.keepassxc.enable = true;
