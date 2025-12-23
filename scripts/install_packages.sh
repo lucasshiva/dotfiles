@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# This scripts is for packages we can't or don't want to install via home-manager and Nix.
+# Packages and utilities not managed by Nix/Home Manager.
 
-set -e
+set -euo pipefail
 
 if ! command -v yay >/dev/null; then
     echo "yay is not installed. Please install yay first."
@@ -10,16 +10,14 @@ if ! command -v yay >/dev/null; then
 fi
 
 
-install_package() {
+install_packages() {
     for package in "$@"; do
-        if yay -Qi "${package}" >/dev/null 2>&1; then
-            echo "${package} is already installed."
-            continue
+        if yay -Qi "$package" >/dev/null 2>&1; then
+            echo "✓ $package already installed"
+        else
+            echo "→ Installing $package"
+            yay -S --noconfirm --needed "$package"
         fi
-
-        echo "Installing ${package}..."
-        yay -S --noconfirm --needed "${package}"
-        return
     done
 }
 
@@ -30,13 +28,38 @@ install_fvm() {
     fi
 
     echo "Installing FVM - Flutter Version Manager..."
+    
+    # Linux desktop dependencies for Flutter.
     sudo pacman -S ninja cmake --noconfirm --needed
+
     curl -fsSL https://fvm.app/install.sh | bash
 }
 
-install_package visual-studio-code-bin
-install_package rider
-install_package android-studio
-install_package dotnet-sdk dotnet-sdk-9.0
-install_package uv
+
+DEV_TOOLS = (
+    visual-studio-code-bin
+    rider
+    android-studio
+    dotnet-sdk 
+    dotnet-sdk-9.0
+    uv
+)
+
+UTILS = (
+    pacsea-bin # Manage pacman via a TUI.
+)
+
+MEDIA = (
+    stremio
+)
+
+echo "Installing dev tools.."
+install_packages "${DEV_TOOLS[@]}"
+
+echo "Installing utilities..."
+install_packages "${UTILS[@]}"
+
+echo "Installing media applications..."
+install_packages "${MEDIA[@]}"
+
 install_fvm
