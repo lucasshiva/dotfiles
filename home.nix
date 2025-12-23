@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -28,13 +33,16 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    nerd-fonts.monaspace  # Coding font
-    inter  # Interface font
-    merriweather  # Document font
+    nerd-fonts.monaspace # Coding font
+    inter # Interface font
+    merriweather # Document font
 
     # I sync everything via Firefox's native sync.
     firefox
     firefox-devedition
+
+    # Formatter for Nix files.
+    nixfmt-rfc-style
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -127,7 +135,7 @@
       "--header"
       "--group-directories-first"
     ];
-    icons = "auto";  # This requires a nerd font.
+    icons = "auto"; # This requires a nerd font.
     git = true;
     colors = "always";
   };
