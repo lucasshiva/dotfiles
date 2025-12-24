@@ -35,6 +35,11 @@ install_fvm() {
     curl -fsSL https://fvm.app/install.sh | bash
 }
 
+# Essential packages for a good base system.
+# Depending on how we install Arch, or which arch-based distro we use, some of these packages might be missing.
+CORE = (
+    base-devel
+)
 
 DEV_TOOLS = (
     visual-studio-code-bin
@@ -52,6 +57,9 @@ UTILS = (
 MEDIA = (
     stremio
 )
+
+echo "Installing core packages..."
+install_packages "${CORE[@]}"
 
 echo "Installing dev tools.."
 install_packages "${DEV_TOOLS[@]}"
