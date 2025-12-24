@@ -51,6 +51,9 @@
 
     # Disk usage/free utility - a `df` alternative.
     duf
+
+    # A simple, fast, and user-friendly alternative to find.
+    fd
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
