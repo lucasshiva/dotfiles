@@ -54,6 +54,9 @@
 
     # A simple, fast, and user-friendly alternative to find.
     fd
+
+    # A command-line benchmarking tool.
+    hyperfine
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
