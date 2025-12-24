@@ -115,6 +115,8 @@
   #   exec fish
   # fi
 
+  # I am currently using Bash as the login shell, but I could switch to zsh if needed.
+  # Or maybe also manage Bash via Home Manager.
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -127,6 +129,8 @@
     };
   };
 
+  # Fish as the login shell is not ideal because it's not POSIX compliant.
+  # So we use bash/zsh as the login shell and spawn fish from there.
   programs.fish = {
     enable = true;
     generateCompletions = true;
@@ -135,6 +139,7 @@
     '';
   };
 
+  # These aliases apply to all shells managed by Home Manager.
   home.shellAliases = {
     cat = "bat --paging=never";
     bat = "bat --color=always";
@@ -199,6 +204,8 @@
     };
   };
 
+  # Fuzzy finder.
+  # Automatically adds Ctrl+T for file search and Ctrl+R for command history search.
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
