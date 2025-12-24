@@ -56,6 +56,7 @@ UTILS = (
 
 MEDIA = (
     stremio
+    steam # Check the Arch Wiki on how to set up Steam correctly.
 )
 
 echo "Installing core packages..."
