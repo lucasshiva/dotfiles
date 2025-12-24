@@ -48,6 +48,9 @@
 
     # For Wayland clipboard support.
     wl-clipboard
+
+    # Disk usage/free utility - a `df` alternative.
+    duf
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
