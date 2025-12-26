@@ -19,6 +19,13 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      user = "lucas";
+      homeDir = "/home/lucas";
+
+      # We need a hardcoded absolute path for `mkOutOfStoreSymlink` to function like I want it to.
+      # With this, I can edit files in the system and the changes will be reflected by files in the repo.
+      # Putting this into its own option just makes it simpler to reuse.
+      configDir = "${homeDir}/.config/home-manager";
     in
     {
       homeConfigurations."lucas" = home-manager.lib.homeManagerConfiguration {
@@ -29,6 +36,9 @@
         modules = [
           {
             nixpkgs.config.allowUnfree = true;
+            home.username = user;
+            home.homeDirectory = homeDir;
+            my.configDir = configDir;
           }
 
           ./home.nix

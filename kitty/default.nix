@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  configFile = builtins.toString ./kitty.conf;
+  configFile = "${config.my.configDir}/kitty/kitty.conf";
 in
 {
   xdg.configFile = {

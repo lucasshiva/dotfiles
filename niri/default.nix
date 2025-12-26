@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  configFile = builtins.toString ./config.kdl;
+  configFile = "${config.my.configDir}/niri/config.kdl";
 in
 {
   xdg.configFile = {

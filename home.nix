@@ -9,14 +9,10 @@
 {
   imports = [
     inputs.dms.homeModules.dank-material-shell
+    ./options.nix
     ./niri
     ./kitty
   ];
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "lucas";
-  home.homeDirectory = "/home/lucas";
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
