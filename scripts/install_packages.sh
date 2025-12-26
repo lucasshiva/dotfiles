@@ -59,16 +59,23 @@ MEDIA = (
     steam # Check the Arch Wiki on how to set up Steam correctly.
 )
 
-echo "Installing core packages..."
+DESKTOP = (
+    niri
+)
+
+echo "Installing core packages.."
 install_packages "${CORE[@]}"
 
 echo "Installing dev tools.."
 install_packages "${DEV_TOOLS[@]}"
 
-echo "Installing utilities..."
+echo "Installing utilities.."
 install_packages "${UTILS[@]}"
 
-echo "Installing media applications..."
+echo "Installing media applications.."
 install_packages "${MEDIA[@]}"
+
+echo "Installing desktop packages.."
+install_packages "${DESKTOP[@]}"
 
 install_fvm

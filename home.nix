@@ -2,10 +2,14 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 
 {
+  imports = [
+    inputs.dms.homeModules.dankMaterialShell.default
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lucas";
@@ -60,6 +64,9 @@
 
     # A command-line benchmarking tool.
     hyperfine
+
+    # For Niri
+    xwayland-satellite
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -96,7 +103,7 @@
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #  /etc/profiles/per-user/lucas/etc/profile.d/hm-session-vars.sh
-    home.sessionVariables = {
+  home.sessionVariables = {
     EDITOR = "code --wait";
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
   };
@@ -222,6 +229,15 @@
 
   # Manage XDG base directories, like XDG_DATA_HOME, XDG_CACHE_HOME, etc.
   xdg.enable = true;
+
+  # DankMaterialShell is a batteries-included shell for wayland.
+  programs.dank-material-shell = {
+    enable = true;
+
+    # Enabling this will start DMS in every compositor/DE we have.
+    # I prefer enabling it manually in the compositor's config file.
+    systemd.enable = false;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
