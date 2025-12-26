@@ -38,6 +38,8 @@ install_fvm() {
 # Depending on how we install Arch, or which arch-based distro we use, some of these packages might be missing.
 CORE=(
     base-devel
+    wget
+    curl
 )
 
 DEV_TOOLS=(
