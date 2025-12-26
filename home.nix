@@ -96,9 +96,7 @@
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
   #  /etc/profiles/per-user/lucas/etc/profile.d/hm-session-vars.sh
-  #
-  # I am sourcing it in my .bashrc, and bash starts fish or zsh as the default shell.
-  home.sessionVariables = {
+    home.sessionVariables = {
     EDITOR = "code --wait";
     XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
   };
@@ -124,18 +122,15 @@
   #   exec fish
   # fi
 
-  # I am currently using Bash as the login shell, but I could switch to zsh if needed.
-  # Or maybe also manage Bash via Home Manager.
-  programs.zsh = {
+  # NOTE: Don't remove system bash.
+  # Bash is the default login shell, but we run `fish` when possible.
+  programs.bash = {
     enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    history = {
-      size = 20000;
-      ignoreAllDups = true;
-      path = "$HOME/.zsh_history";
-    };
+    initExtra = ''
+      		if command -v fish >/dev/null; then
+      		  exec fish
+      		fi
+      	'';
   };
 
   # Fish as the login shell is not ideal because it's not POSIX compliant.
@@ -167,7 +162,7 @@
   # That way, starship.nix and starship.toml would live together in the same folder.
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
     settings = lib.importTOML ./starship/starship.toml;
   };
@@ -175,7 +170,7 @@
   # A modern alternative for ls.
   programs.eza = {
     enable = true;
-    enableZshIntegration = true;
+    enableBashIntegration = true;
     enableFishIntegration = true;
     extraOptions = [
       "--header"
@@ -218,7 +213,7 @@
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
-    enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 
   # Password manager.
