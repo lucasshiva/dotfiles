@@ -47,7 +47,7 @@ DEV_TOOLS=(
     dotnet-sdk 
     dotnet-sdk-9.0
     uv
-kitty
+    kitty
 )
 
 UTILS=(
@@ -66,6 +66,8 @@ MEDIA=(
 
 DESKTOP=(
     niri
+    firefox
+    firefox-developer-edition
 )
 
 # --- Usage / Help ---

@@ -45,10 +45,6 @@
     inter # Interface font
     merriweather # Document font
 
-    # I sync everything via Firefox's native sync.
-    firefox
-    firefox-devedition
-
     # Formatter for Nix files.
     nixfmt-rfc-style
 
@@ -227,7 +223,8 @@
 
   # Helps with OpenGL, EGL, and other graphical issues when using Nix programs outside of NixOS.
   # See https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-sudo
-  # Don't forget to run `sudo /nix/store/pgmv59l0v8kfx9zsw431amm18cl7s3av-non-nixos-gpu/bin/non-nixos-gpu-setup` after activation.
+  # NOTE: Don't forget to run `sudo /nix/store/pgmv59l0v8kfx9zsw431amm18cl7s3av-non-nixos-gpu/bin/non-nixos-gpu-setup` after activation.
+  # NOTE2: This isn't perfect. We might need NixGL, configure NVIDIA drivers manually, or install graphical applications via `pacman`.
   targets.genericLinux.enable = true;
   targets.genericLinux.gpu.enable = true;
 
