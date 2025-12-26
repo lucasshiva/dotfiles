@@ -25,3 +25,8 @@ yay -S $QUICKSHELL --needed --noconfirm
 
 # Install selected DMS packages.
 yay -S "${DMS_PACKAGES[@]}" --needed --noconfirm
+
+# Install dynamic theme extension in VS Code.
+wget https://github.com/AvengeMedia/DankMaterialShell/raw/refs/heads/master/quickshell/matugen/dynamic-base16-dankshell.vsix
+code --install-extension dynamic-base16-dankshell.vsix
+rm dynamic-base16-dankshell.vsix
