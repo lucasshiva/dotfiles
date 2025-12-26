@@ -11,16 +11,15 @@ fi
 
 
 install_packages() {
-    for package in "$@"; do
-        if yay -Qi "$package" >/dev/null 2>&1; then
-            echo "✓ $package already installed"
-        else
-            echo "→ Installing $package"
-            yay -S --noconfirm --needed "$package"
-        fi
-    done
-}
+    if [[ $# -eq 0 ]]; then
+        echo "No packages provided to install."
+        return
+    fi
 
+    echo "Installing packages: $*"
+    # Install all packages at once
+    yay -S --noconfirm --needed "$@"
+}
 install_fvm() {
     if command -v fvm >/dev/null; then
         echo "FVM is already installed."
@@ -108,10 +107,17 @@ if [[ $# -gt 0 ]]; then
 fi
 
 SELECTED_CATEGORIES=()
+ALL_PACKAGES=(
+    "${CORE[@]}"
+    "${DEV_TOOLS[@]}"
+    "${UTILS[@]}"
+    "${MEDIA[@]}"
+    "${DESKTOP_ENVIRONMENTS[@]}"
+)
 
 if [[ $# -eq 0 ]]; then
     # No arguments → install everything
-    SELECTED_CATEGORIES=("core" "dev" "utils" "media" "desktop")
+    SELECTED_CATEGORIES=("all")
 else
     # Split comma-separated input into array
     for arg in "$@"; do
@@ -128,6 +134,10 @@ fi
 # --- Install packages based on chosen categories ---
 for category in "${SELECTED_CATEGORIES[@]}"; do
     case "$category" in
+        all)
+            echo "Installing all packages..."
+            install_packages "${ALL_PACKAGES[@]}"
+            ;;
         core)
             echo "Installing core packages..."
             install_packages "${CORE[@]}"
