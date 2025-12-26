@@ -37,11 +37,11 @@ install_fvm() {
 
 # Essential packages for a good base system.
 # Depending on how we install Arch, or which arch-based distro we use, some of these packages might be missing.
-CORE = (
+CORE=(
     base-devel
 )
 
-DEV_TOOLS = (
+DEV_TOOLS=(
     visual-studio-code-bin
     rider
     android-studio
@@ -50,7 +50,7 @@ DEV_TOOLS = (
     uv
 )
 
-UTILS = (
+UTILS=(
     pacsea-bin # Manage pacman via a TUI.
     wl-clipboard # For Wayland clipboard support.
     duf # Disk usage/free utility - a `df` alternative.
@@ -59,12 +59,12 @@ UTILS = (
     xwayland-satellite # For Niri
 )
 
-MEDIA = (
+MEDIA=(
     stremio
     steam # Check the Arch Wiki on how to set up Steam correctly.
 )
 
-DESKTOP = (
+DESKTOP=(
     niri
 )
 
