@@ -8,7 +8,6 @@
 
 {
   imports = [
-    inputs.dms.homeModules.dank-material-shell
     ./options.nix
     ./niri
     ./kitty
@@ -84,6 +83,8 @@
   #  /etc/profiles/per-user/lucas/etc/profile.d/hm-session-vars.sh
   home.sessionVariables = {
     EDITOR = "code --wait";
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
   };
 
   home.sessionPath = [
@@ -207,15 +208,6 @@
 
   # Manage XDG base directories, like XDG_DATA_HOME, XDG_CACHE_HOME, etc.
   xdg.enable = true;
-
-  # DankMaterialShell is a batteries-included shell for wayland.
-  programs.dank-material-shell = {
-    enable = true;
-
-    # Enabling this will start DMS in every compositor/DE we have.
-    # I prefer enabling it manually in the compositor's config file.
-    systemd.enable = false;
-  };
 
   # Helps with OpenGL, EGL, and other graphical issues when using Nix programs outside of NixOS.
   # See https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-sudo
