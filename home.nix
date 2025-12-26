@@ -55,6 +55,9 @@
     # A simple, fast, and user-friendly alternative to find.
     fd
 
+    # An intuitive find & replace CLI (sed alternative)
+    sd
+
     # A command-line benchmarking tool.
     hyperfine
   ];
