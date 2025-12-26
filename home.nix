@@ -9,6 +9,7 @@
 {
   imports = [
     inputs.dms.homeModules.dank-material-shell
+    ./niri
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
