@@ -1,10 +1,9 @@
 { lib, config, ... }:
 let
-  niriConfig = builtins.toString ./config.kdl;
-  mkLink = path: config.lib.file.mkOutOfStoreSymlink path;
+  configFile = builtins.toString ./config.kdl;
 in
 {
   xdg.configFile = {
-    "niri/config.kdl".source = mkLink niriConfig;
+    "niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink configFile;
   };
 }
