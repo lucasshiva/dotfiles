@@ -83,14 +83,12 @@ Categories (comma or space-separated):
   utils      - Utility programs
   media      - Media applications
   desktop    - Desktop environments / compositors
-  fvm        - Flutter Version Manager
 
 Examples:
   $0              # Install all categories
   $0 utils        # Install only utilities
   $0 core,dev     # Install core + dev packages
   $0 utils media  # Mix space-separated categories
-  $0 fvm          # Install only FVM
 
 Options:
   -h, --help      Show this help message
@@ -148,6 +146,8 @@ for category in "${SELECTED_CATEGORIES[@]}"; do
         dev)
             echo "Installing development tools..."
             install_packages "${DEV_TOOLS[@]}"
+            echo "Installing FVM..."
+            install_fvm
             ;;
         utils)
             echo "Installing utilities..."
@@ -160,10 +160,6 @@ for category in "${SELECTED_CATEGORIES[@]}"; do
         desktop)
             echo "Installing desktop packages..."
             install_packages "${DESKTOP_ENVIRONMENTS[@]}"
-            ;;
-        fvm)
-            echo "Installing FVM..."
-            install_fvm
             ;;
         *)
             echo "Unknown category: $category"
