@@ -47,6 +47,7 @@ DEV_TOOLS=(
     dotnet-sdk 
     dotnet-sdk-9.0
     uv
+kitty
 )
 
 UTILS=(
