@@ -50,23 +50,8 @@
     # Formatter for Nix files.
     nixfmt-rfc-style
 
-    # For Wayland clipboard support.
-    wl-clipboard
-
-    # Disk usage/free utility - a `df` alternative.
-    duf
-
-    # A simple, fast, and user-friendly alternative to find.
-    fd
-
-    # An intuitive find & replace CLI (sed alternative)
-    sd
-
     # A command-line benchmarking tool.
     hyperfine
-
-    # For Niri
-    xwayland-satellite
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

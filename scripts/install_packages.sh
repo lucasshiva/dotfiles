@@ -52,6 +52,11 @@ DEV_TOOLS = (
 
 UTILS = (
     pacsea-bin # Manage pacman via a TUI.
+    wl-clipboard # For Wayland clipboard support.
+    duf # Disk usage/free utility - a `df` alternative.
+    fd # A simple, fast, and user-friendly alternative to find.
+    sd # An intuitive find & replace CLI (sed alternative)
+    xwayland-satellite # For Niri
 )
 
 MEDIA = (
