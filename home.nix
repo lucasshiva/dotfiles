@@ -91,7 +91,6 @@
   #  /etc/profiles/per-user/lucas/etc/profile.d/hm-session-vars.sh
   home.sessionVariables = {
     EDITOR = "code --wait";
-    XDG_DATA_DIRS = "$HOME/.nix-profile/share:$XDG_DATA_DIRS";
   };
 
   home.sessionPath = [
@@ -224,6 +223,12 @@
     # I prefer enabling it manually in the compositor's config file.
     systemd.enable = false;
   };
+
+  # Helps with OpenGL, EGL, and other graphical issues when using Nix programs outside of NixOS.
+  # See https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-sudo
+  # Don't forget to run `sudo /nix/store/pgmv59l0v8kfx9zsw431amm18cl7s3av-non-nixos-gpu/bin/non-nixos-gpu-setup` after activation.
+  targets.genericLinux.enable = true;
+  targets.genericLinux.gpu.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
