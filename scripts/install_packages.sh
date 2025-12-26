@@ -68,19 +68,92 @@ DESKTOP=(
     niri
 )
 
-echo "Installing core packages.."
-install_packages "${CORE[@]}"
+# --- Usage / Help ---
+print_help() {
+    cat << EOF
+Usage: $0 [categories]
 
-echo "Installing dev tools.."
-install_packages "${DEV_TOOLS[@]}"
+Install selected categories of packages.
 
-echo "Installing utilities.."
-install_packages "${UTILS[@]}"
+Categories (comma or space-separated):
+  core       - Base system packages
+  dev        - Development tools
+  utils      - Utility programs
+  media      - Media applications
+  desktop    - Desktop environments / compositors
+  fvm        - Flutter Version Manager
 
-echo "Installing media applications.."
-install_packages "${MEDIA[@]}"
+Examples:
+  $0              # Install all categories
+  $0 utils        # Install only utilities
+  $0 core,dev     # Install core + dev packages
+  $0 utils media  # Mix space-separated categories
+  $0 fvm          # Install only FVM
 
-echo "Installing desktop packages.."
-install_packages "${DESKTOP[@]}"
+Options:
+  -h, --help      Show this help message
+EOF
+}
 
-install_fvm
+# --- Parse CLI arguments ---
+if [[ $# -gt 0 ]]; then
+    for arg in "$@"; do
+        case "$arg" in
+            -h|--help)
+                print_help
+                exit 0
+                ;;
+        esac
+    done
+fi
+
+SELECTED_CATEGORIES=()
+
+if [[ $# -eq 0 ]]; then
+    # No arguments → install everything
+    SELECTED_CATEGORIES=("core" "dev" "utils" "media" "desktop")
+else
+    # Split comma-separated input into array
+    for arg in "$@"; do
+        [[ "$arg" == "-h" || "$arg" == "--help" ]] && continue
+        IFS=',' read -ra split <<< "$arg"
+        for cat in "${split[@]}"; do
+            cat=$(echo "$cat" | xargs)
+            SELECTED_CATEGORIES+=("$cat")
+        done
+    done
+fi
+
+
+# --- Install packages based on chosen categories ---
+for category in "${SELECTED_CATEGORIES[@]}"; do
+    case "$category" in
+        core)
+            echo "Installing core packages..."
+            install_packages "${CORE[@]}"
+            ;;
+        dev)
+            echo "Installing development tools..."
+            install_packages "${DEV_TOOLS[@]}"
+            ;;
+        utils)
+            echo "Installing utilities..."
+            install_packages "${UTILS[@]}"
+            ;;
+        media)
+            echo "Installing media applications..."
+            install_packages "${MEDIA[@]}"
+            ;;
+        desktop)
+            echo "Installing desktop packages..."
+            install_packages "${DESKTOP_ENVIRONMENTS[@]}"
+            ;;
+        fvm)
+            echo "Installing FVM..."
+            install_fvm
+            ;;
+        *)
+            echo "Unknown category: $category"
+            ;;
+    esac
+done
