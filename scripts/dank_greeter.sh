@@ -11,6 +11,8 @@
 #
 # Niri must be installed system-wide for the greeter to find it.
 # This means installing it via `pacman` in Arch or `configuration.nix` in NixOS.
+# If Niri is missing, we install it by default in the command below.
+# This should allows us to have a functional greeter even if we don't use Niri as a session.
 
 set -euo pipefail
 
@@ -37,6 +39,7 @@ dms greeter sync
 
 
 # Here we configure the Niri session for the greeter.
+# It's a good idea to configure displays in here.
 echo "Configuring Niri for the greeter.."
 sudo tee /etc/greetd/niri.kdl > /dev/null << 'EOF'
 hotkey-overlay {
