@@ -83,7 +83,7 @@
   #  /etc/profiles/per-user/lucas/etc/profile.d/hm-session-vars.sh
   home.sessionVariables = {
     EDITOR = "code --wait";
-TERMINAL "kitty"
+    TERMINAL "kitty"
     QT_QPA_PLATFORMTHEME = "qt5ct"; # Requires qt5ct to be installed
     QT_QPA_PLATFORMTHEME_QT6 = "qt6ct"; # Requires qt6ct (or qt6ct-kde from the AUR) to be installed
     ELECTRON_OZONE_PLATFORM_HINT "auto" # For electron apps
@@ -92,7 +92,7 @@ TERMINAL "kitty"
 
   # Add custom paths to the $PATH environment variable.
   home.sessionPath = [
-        "$HOME/.local/bin"
+    "$HOME/.local/bin"
     "$HOME/.nix-profile/bin"
     "$HOME/fvm/bin"
     "$HOME/.pub-cache/bin"
