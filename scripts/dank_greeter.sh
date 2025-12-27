@@ -58,22 +58,26 @@ output "HDMI-A-1" {
 }
 
 output "DP-1" {
-  off
+  mode "1920x1080@144.000"
+  position x=4480 y=0
+  scale 1
 }
 
 output "DP-2" {
-  off
+  mode "1920x1080@60.000"
+  position x=0 y=0
+  scale 1
 }
 
 output "DP-3" {
-  position x=0 y=0
   mode "2560x1440@155.000"
-  focus-at-startup 
+  position x=1920 y=0
+  scale 1
+  focus-at-startup
 }
 EOF
 
 # Update the command in `/etc/greetd/config.toml to use this configuration
-sudo rm /etc/greetd/config.toml
 sudo tee /etc/greetd/config.toml > /dev/null << 'EOF'
 [terminal]
 vt = 1
@@ -84,4 +88,4 @@ command = "dms-greeter --command niri -C /etc/greetd/niri.kdl"
 user = "greeter"
 EOF
 
-echo "Installation completed!"
+echo "Greeter installation completed!"
