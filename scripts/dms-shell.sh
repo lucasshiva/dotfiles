@@ -26,7 +26,21 @@ yay -S $QUICKSHELL --needed --noconfirm
 # Install selected DMS packages.
 yay -S "${DMS_PACKAGES[@]}" --needed --noconfirm
 
-# Install dynamic theme extension in VS Code.
-wget https://github.com/AvengeMedia/DankMaterialShell/raw/refs/heads/master/quickshell/matugen/dynamic-base16-dankshell.vsix
-code --install-extension dynamic-base16-dankshell.vsix
-rm dynamic-base16-dankshell.vsix
+if command -v code; then
+  EXT_ID="local.dynamic-base16-dankshell"
+  VSIX_FILE="dynamic-base16-dankshell.vsix"
+
+  # Install dynamic theme extension in VS Code.
+  #
+  # NOTE: We have to reload the window (or maybe just the extensions) when we change colors in DMS.
+
+  if code --list-extensions | grep -qx "$EXT_ID"; then
+    echo "dynamic-base16-dankshell extension already installed."
+    exit 0
+  fi
+
+  echo "Installing dynamic-base16-dankshell extension for VS Code.."
+  wget "https://github.com/AvengeMedia/DankMaterialShell/raw/refs/heads/master/quickshell/matugen/$VSIX_FILE";
+  code --install-extension $VSIX_FILE
+  rm -f $VSIX_FILE
+fi
