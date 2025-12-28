@@ -41,6 +41,7 @@ CORE=(
     wget
     curl
     visual-studio-code-bin
+    kitty
 )
 
 DEV_TOOLS=(
@@ -49,7 +50,6 @@ DEV_TOOLS=(
     dotnet-sdk 
     dotnet-sdk-9.0
     uv
-    kitty
 )
 
 UTILS=(
