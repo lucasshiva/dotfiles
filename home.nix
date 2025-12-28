@@ -101,7 +101,7 @@
   # Though we could set the default shell directly in home-manager,
   # it would require activation scripts and root access on activation.
   #
-  # Therefore, we spawn the default shell (zsh or fish) through bash.
+  # A simple solution would be to spawn zsh inside bash.
   # For example, add the following in .bashrc to enable zsh:
   #
   # # If not running interactively, don't do anything
@@ -111,26 +111,32 @@
   #   exec zsh
   # fi
 
-  # NOTE: Don't remove system bash.
-  # Bash is the default login shell, but we run `zsh` when possible.
+  # NOTE: Don't remove system bash or things will break.
   programs.bash = {
     enable = true;
-    initExtra = ''
-      		if command -v zsh >/dev/null; then
-      		  exec zsh
-      		fi
-      	'';
+    # If we want to spawn zsh via bash.
+    /*
+      initExtra = ''
+         		if command -v zsh >/dev/null; then
+         		  exec zsh
+         		fi
+         	'';
+    */
   };
 
   programs.zsh = {
     enable = true;
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+    ];
     enableCompletion = true;
     autosuggestion = {
       enable = true;
-      strategy = [
-        "history"
-        "completion"
-      ];
+      strategy = [ ];
     };
     syntaxHighlighting.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
@@ -142,6 +148,14 @@
       share = true;
       extended = true;
     };
+    # We source `fzf-tab` here because it needs to come before autosuggestions.
+    completionInit = ''
+      autoload -U compinit
+      compinit
+
+      # Must be sourced before autosuggestions or syntax-highlighting.
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+    '';
   };
 
   # These aliases apply to all shells managed by Home Manager.
