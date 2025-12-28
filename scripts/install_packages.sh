@@ -40,10 +40,10 @@ CORE=(
     base-devel
     wget
     curl
+    visual-studio-code-bin
 )
 
 DEV_TOOLS=(
-    visual-studio-code-bin
     rider
     android-studio
     dotnet-sdk 
