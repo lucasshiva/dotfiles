@@ -44,6 +44,16 @@ CORE=(
     kitty
 )
 
+AUDIO=(
+    pipewire
+    lib32-pipewire
+    pipewire-alsa
+    pipewire-jack
+    lib32-pipewire-jack
+    pipewire-pulse
+    wirepumbler
+)
+
 DEV_TOOLS=(
     rider
     android-studio
@@ -81,6 +91,7 @@ Install selected categories of packages.
 
 Categories (comma or space-separated):
   core       - Base system packages
+  audio      - Audio packages
   dev        - Development tools
   utils      - Utility programs
   media      - Media applications
@@ -110,17 +121,10 @@ if [[ $# -gt 0 ]]; then
 fi
 
 SELECTED_CATEGORIES=()
-ALL_PACKAGES=(
-    "${CORE[@]}"
-    "${DEV_TOOLS[@]}"
-    "${UTILS[@]}"
-    "${MEDIA[@]}"
-    "${DESKTOP_ENVIRONMENTS[@]}"
-)
 
 if [[ $# -eq 0 ]]; then
     # No arguments → install everything
-    SELECTED_CATEGORIES=("all")
+    SELECTED_CATEGORIES=("core" "audio" "dev" "utils" "media" "desktop")
 else
     # Split comma-separated input into array
     for arg in "$@"; do
@@ -137,13 +141,14 @@ fi
 # --- Install packages based on chosen categories ---
 for category in "${SELECTED_CATEGORIES[@]}"; do
     case "$category" in
-        all)
-            echo "Installing all packages..."
-            install_packages "${ALL_PACKAGES[@]}"
-            ;;
         core)
             echo "Installing core packages..."
             install_packages "${CORE[@]}"
+            ;;
+        audio)
+            echo "Installing audio packages..."
+            install_packages "${AUDIO[@]}"
+            systemd
             ;;
         dev)
             echo "Installing development tools..."
