@@ -16,9 +16,14 @@
 
 set -euo pipefail
 
+if !command -v dms > /dev/null; then
+  echo "DMS must be installed in order to setup DankGreeter correctly!"
+  exit 1
+fi
+
 # Install greeter
 echo "Installing dms-greeter-git from the AUR.."
-yay -S greetd-dms-greeter-git niri --needed --noconfirm
+yay -S greetd-dms-greeter-git niri quickshell-git --needed --noconfirm
 
 # This will: 
 # - Configure `/etc/greetd/config.toml` with the correct compositor command (Niri, Hyprland, etc).
