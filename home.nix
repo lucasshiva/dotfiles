@@ -98,38 +98,50 @@
     "$HOME/.pub-cache/bin"
   ];
 
-  # Though we can set the default shell directly in home-manager,
+  # Though we could set the default shell directly in home-manager,
   # it would require activation scripts and root access on activation.
   #
   # Therefore, we spawn the default shell (zsh or fish) through bash.
-  # For example, add the following in .bashrc to enable fish:
+  # For example, add the following in .bashrc to enable zsh:
   #
   # # If not running interactively, don't do anything
   # [[ $- != *i* ]] && return
   #
-  # if command -v fish >/dev/null; then
-  #   exec fish
+  # if command -v zsh >/dev/null; then
+  #   exec zsh
   # fi
 
   # NOTE: Don't remove system bash.
-  # Bash is the default login shell, but we run `fish` when possible.
+  # Bash is the default login shell, but we run `zsh` when possible.
   programs.bash = {
     enable = true;
     initExtra = ''
-      		if command -v fish >/dev/null; then
-      		  exec fish
+      		if command -v zsh >/dev/null; then
+      		  exec zsh
       		fi
       	'';
   };
 
-  # Fish as the login shell is not ideal because it's not POSIX compliant.
-  # So we use bash/zsh as the login shell and spawn fish from there.
-  programs.fish = {
+  programs.zsh = {
     enable = true;
-    generateCompletions = true;
-    shellInit = ''
-      set -g fish_greeting
-    '';
+    enableCompletion = true;
+    autosuggestion = {
+      enable = true;
+      strategy = [
+        "history"
+        "completion"
+      ];
+    };
+    syntaxHighlighting.enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
+    history = {
+      size = 100000;
+      ignoreDups = true;
+      ignoreAllDups = true;
+      saveNoDups = true;
+      share = true;
+      extended = true;
+    };
   };
 
   # These aliases apply to all shells managed by Home Manager.
@@ -151,8 +163,8 @@
   # That way, starship.nix and starship.toml would live together in the same folder.
   programs.starship = {
     enable = true;
+    enableZshIntegration = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
     settings = lib.importTOML ./starship/starship.toml;
   };
 
@@ -160,7 +172,7 @@
   programs.eza = {
     enable = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
+    enableZshIntegration = true;
     extraOptions = [
       "--header"
       "--group-directories-first"
@@ -201,7 +213,7 @@
   # Automatically adds Ctrl+T for file search and Ctrl+R for command history search.
   programs.fzf = {
     enable = true;
-    enableFishIntegration = true;
+    enableZshIntegration = true;
     enableBashIntegration = true;
   };
 
