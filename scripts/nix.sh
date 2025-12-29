@@ -4,7 +4,7 @@ set -euo pipefail
 
 if command -v nix > /dev/null; then
   echo "Nix is already installed!"
-  exit 0
+  return 2>/dev/null || exit
 fi
 
 sudo pacman -S nix --needed --noconfirm

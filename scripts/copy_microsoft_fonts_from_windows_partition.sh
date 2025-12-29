@@ -12,7 +12,7 @@ DESTINATION_DIR="/usr/local/share/fonts/WindowsFonts"
 if [ -d "$DESTINATION_DIR" ]; then
   echo "Error: $DESTINATION_DIR already exists."
   echo "Aborting to avoid overwriting files.."
-  exit 1
+  return 2>/dev/null || exit
 fi
 
 mkdir -p "$DESTINATION_DIR"

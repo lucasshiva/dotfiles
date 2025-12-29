@@ -4,7 +4,7 @@ set -e
 
 if command -v yay >/dev/null; then
   echo "yay is already installed. Aborting.."
-  exit 1
+  return 2>/dev/null || exit
 fi
 
 sudo pacman -S --needed git base-devel

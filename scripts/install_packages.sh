@@ -6,7 +6,7 @@ set -euo pipefail
 
 if ! command -v yay >/dev/null; then
     echo "yay is not installed. Please install yay first."
-    exit 1
+    return 2>/dev/null || exit
 fi
 
 
@@ -148,7 +148,6 @@ for category in "${SELECTED_CATEGORIES[@]}"; do
         audio)
             echo "Installing audio packages..."
             install_packages "${AUDIO[@]}"
-            systemd
             ;;
         dev)
             echo "Installing development tools..."

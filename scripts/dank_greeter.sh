@@ -16,9 +16,14 @@
 
 set -euo pipefail
 
-if !command -v dms > /dev/null; then
+if ! command -v dms > /dev/null; then
   echo "DMS must be installed in order to setup DankGreeter correctly!"
-  exit 1
+  return 2>/dev/null || exit
+fi
+
+if pacman -Qqs | grep greetd-dms-greeter; then
+  echo "DankGreeter is already installed!"
+  return 2>/dev/null || exit
 fi
 
 # Install greeter

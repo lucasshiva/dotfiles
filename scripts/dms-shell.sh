@@ -6,7 +6,7 @@ set -euo pipefail
 
 if command -v dms > /dev/null; then
   echo "DankMaterialShell is already installed!"
-  exit 0
+  return 2>/dev/null || exit
 fi
 
 QUICKSHELL="quickshell-git"
