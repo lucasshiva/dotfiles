@@ -69,6 +69,7 @@ UTILS=(
     fd # A simple, fast, and user-friendly alternative to find.
     sd # An intuitive find & replace CLI (sed alternative)
     xwayland-satellite # For Niri
+    hunspell-en_US # Spell checking for American English
 )
 
 MEDIA=(
