@@ -88,6 +88,7 @@
     QT_QPA_PLATFORMTHEME_QT6 = "qt6ct"; # Requires qt6ct (or qt6ct-kde from the AUR) to be installed
     ELECTRON_OZONE_PLATFORM_HINT = "auto"; # For electron apps
     PROTON_ENABLE_WAYLAND = "1";
+    ZDOTDIR = "${config.xdg.configHome}/zsh";
   };
 
   # Add custom paths to the $PATH environment variable.
