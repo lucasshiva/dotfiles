@@ -2,7 +2,12 @@
 
 set -euo pipefail
 
-sudo pacman -S nix
+if command -v nix > /dev/null; then
+  echo "Nix is already installed!"
+  exit 0
+fi
+
+sudo pacman -S nix --needed --noconfirm
 systemctl enable --now nix-daemon.service
 
 sudo tee /etc/nix/nix.conf > /dev/null << 'EOF'

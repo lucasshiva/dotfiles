@@ -4,6 +4,11 @@ set -euo pipefail
 
 # Manual installation of Dank Material Shell.
 
+if command -v dms > /dev/null; then
+  echo "DankMaterialShell is already installed!"
+  exit 0
+fi
+
 QUICKSHELL="quickshell-git"
 DMS_PACKAGES=(
     dms-shell-git
