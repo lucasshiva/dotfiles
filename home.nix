@@ -154,6 +154,9 @@
       autoload -U compinit
       compinit
 
+      bindkey "\\e[1;5C" forward-word
+      bindkey "\\e[1;5D" backward-word
+
       # Must be sourced before autosuggestions or syntax-highlighting.
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
