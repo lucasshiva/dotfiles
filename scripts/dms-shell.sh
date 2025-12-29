@@ -10,9 +10,12 @@ DMS_PACKAGES=(
     cava # Audio visualizer
     i2c-tools # External monitor brightness control
     matugen-bin # Dynamic wallpaper-based theming 
-    qt6-multimedia # Sound effect support 
+    qt6-multimedia-ffmpeg # Sound effect support 
     power-profiles-daemon # Set power profile
     adw-gtk-theme # For theming GTK applications
+    wl-clipboard # Clipboard utilities in Wayland
+    cliphist # Clipboard history
+
 
     # For theming Qt applications. Must set `qt6ct` env var accordingly.
     # There's also qt6ct-kde, which might have a better integration with KDE apps.
