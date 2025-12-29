@@ -165,7 +165,7 @@ for category in "${SELECTED_CATEGORIES[@]}"; do
             ;;
         desktop)
             echo "Installing desktop packages..."
-            install_packages "${DESKTOP_ENVIRONMENTS[@]}"
+            install_packages "${DESKTOP[@]}"
             ;;
         *)
             echo "Unknown category: $category"
