@@ -156,6 +156,12 @@
 
       bindkey "\\e[1;5C" forward-word
       bindkey "\\e[1;5D" backward-word
+bindkey '^[[3~' delete-char
+      bindkey '\e[H' beginning-of-line
+      bindkey '\e[F' end-of-line
+
+      # Select line with Shift+Home / Shift+End
+      bindkey '\e[1;2H' beginning-of-line
 
       # Must be sourced before autosuggestions or syntax-highlighting.
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
