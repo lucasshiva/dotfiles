@@ -102,29 +102,15 @@
   # Though we could set the default shell directly in home-manager,
   # it would require activation scripts and root access on activation.
   #
-  # A simple solution would be to spawn zsh inside bash.
-  # For example, add the following in .bashrc to enable zsh:
-  #
-  # # If not running interactively, don't do anything
-  # [[ $- != *i* ]] && return
-  #
-  # if command -v zsh >/dev/null; then
-  #   exec zsh
-  # fi
+  # Currently, I'm setting the default shell in terminals and editors.
 
+  # Fallback login shell.
   # NOTE: Don't remove system bash or things will break.
   programs.bash = {
     enable = true;
-    # If we want to spawn zsh via bash.
-    /*
-      initExtra = ''
-         		if command -v zsh >/dev/null; then
-         		  exec zsh
-         		fi
-         	'';
-    */
   };
 
+  # Default login shell
   programs.zsh = {
     enable = true;
     plugins = [
@@ -156,7 +142,7 @@
 
       bindkey "\\e[1;5C" forward-word
       bindkey "\\e[1;5D" backward-word
-bindkey '^[[3~' delete-char
+      bindkey '^[[3~' delete-char
       bindkey '\e[H' beginning-of-line
       bindkey '\e[F' end-of-line
 
@@ -166,6 +152,59 @@ bindkey '^[[3~' delete-char
       # Must be sourced before autosuggestions or syntax-highlighting.
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
+  };
+
+  # Fish is set as the default shell in terminals and editors.
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      # Remove greeting
+      set -g fish_greeting
+
+      # Colorscheme: ayu Mirage
+      set -U fish_color_normal CBCCC6
+      set -U fish_color_command 5CCFE6
+      set -U fish_color_keyword 5CCFE6
+      set -U fish_color_quote BAE67E
+      set -U fish_color_redirection D4BFFF
+      set -U fish_color_end F29E74
+      set -U fish_color_error FF3333
+      set -U fish_color_param CBCCC6
+      set -U fish_color_comment 5C6773
+      set -U fish_color_selection --bold --background=FFCC66
+      set -U fish_color_search_match --bold --background=FFCC66
+      set -U fish_color_history_current --bold
+      set -U fish_color_operator FFCC66
+      set -U fish_color_escape 95E6CB
+      set -U fish_color_cwd 73D0FF
+      set -U fish_color_cwd_root red
+      set -U fish_color_option CBCCC6
+      set -U fish_color_valid_path --underline=single
+      set -U fish_color_autosuggestion 707A8C
+      set -U fish_color_user brgreen
+      set -U fish_color_host normal
+      set -U fish_color_host_remote yellow
+      set -U fish_color_history_current --bold
+      set -U fish_color_status red
+      set -U fish_color_cancel --reverse
+      set -U fish_pager_color_prefix normal --bold --underline=single
+      set -U fish_pager_color_progress brwhite --bold --background=cyan
+      set -U fish_pager_color_completion normal
+      set -U fish_pager_color_description B3A06D
+      set -U fish_pager_color_selected_background --background=E6B450
+      set -U fish_pager_color_background
+      set -U fish_pager_color_secondary_prefix
+      set -U fish_pager_color_selected_completion
+      set -U fish_pager_color_selected_prefix
+      set -U fish_pager_color_secondary_completion
+      set -U fish_pager_color_secondary_background
+      set -U fish_pager_color_selected_description
+      set -U fish_pager_color_secondary_description
+    '';
+  };
+
+  programs.nushell = {
+    enable = true;
   };
 
   # These aliases apply to all shells managed by Home Manager.
@@ -189,6 +228,8 @@ bindkey '^[[3~' delete-char
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+    enableNushellIntegration = true;
+    enableFishIntegration = true;
     settings = lib.importTOML ./starship/starship.toml;
   };
 
@@ -196,6 +237,8 @@ bindkey '^[[3~' delete-char
   programs.eza = {
     enable = true;
     enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
     enableZshIntegration = true;
     extraOptions = [
       "--header"
@@ -239,6 +282,7 @@ bindkey '^[[3~' delete-char
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+    enableFishIntegration = true;
   };
 
   # Password manager.
