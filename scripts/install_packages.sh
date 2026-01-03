@@ -59,6 +59,7 @@ DEV_TOOLS=(
     android-studio
     dotnet-sdk 
     dotnet-sdk-9.0
+    aspnet-targeting-pack # Solves error NETSDK1226: Prune Package data not found
     uv
 )
 
